@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+
+# Local Blue-Green runtime state (written by deploy.ps1)
+.bluegreen/

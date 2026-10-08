@@ -1,0 +1,10 @@
+.git
+.bluegreen
+__pycache__
+*.pyc
+nginx
+deploy.ps1
+catalyst*.json
+catalyst-pipelines.yml
+.catalystrc
+app-config.json

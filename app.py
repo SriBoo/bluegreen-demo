@@ -1,43 +1,41 @@
-# import os
-# from http.server import BaseHTTPRequestHandler, HTTPServer
-
-# class H(BaseHTTPRequestHandler):
-#     def do_GET(self):
-#         self.send_response(200)
-#         self.end_headers()
-#         self.wfile.write(b"Hello Sri v1\n")
-
-# port = int(os.environ.get("X_ZOHO_CATALYST_LISTEN_PORT", 9000))
-# HTTPServer(("0.0.0.0", port), H).serve_forever()
-
 import os
-from http.server import BaseHTTPRequestHandler, HTTPServer
+import signal
+import sys
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+# Set by deploy.ps1 for local Blue-Green containers. On Catalyst AppSail
+# APP_COLOR is unset, so the response stays "Hello Ai <version>".
+VERSION = os.environ.get("APP_VERSION", "v1")
+COLOR = os.environ.get("APP_COLOR", "")
 
 
 class H(BaseHTTPRequestHandler):
 
+    def _send(self, status, body):
+        self.send_response(status)
+        self.send_header("Content-Type", "text/plain; charset=utf-8")
+        self.send_header("X-App-Version", VERSION)
+        if COLOR:
+            self.send_header("X-App-Color", COLOR)
+        self.end_headers()
+        self.wfile.write(body.encode())
+
     def do_GET(self):
 
         if self.path == "/health":
-            self.send_response(200)
-            self.end_headers()
-            self.wfile.write(b"ok\n")
+            self._send(200, "ok\n")
             return
 
         if self.path == "/":
-            version = os.environ.get("APP_VERSION", "v1")
-
-            self.send_response(200)
-            self.end_headers()
-            self.wfile.write(
-                f"Hello Ai {version}\n sample test is happening here.encode()
-            )
+            suffix = f" ({COLOR})" if COLOR else ""
+            self._send(200, f"Hello Ai {VERSION}{suffix}\n")
             return
 
-        self.send_response(404)
-        self.end_headers()
-        self.wfile.write(b"Not Found\n")
+        self._send(404, "Not Found\n")
 
+
+# Exit cleanly on "docker stop" (python as PID 1 ignores SIGTERM otherwise).
+signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
 
 port = int(
     os.environ.get(
@@ -46,7 +44,7 @@ port = int(
     )
 )
 
-HTTPServer(
+ThreadingHTTPServer(
     ("0.0.0.0", port),
     H
 ).serve_forever()
