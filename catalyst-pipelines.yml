@@ -2,10 +2,8 @@ version: 1.0
 jobs:
   deploy:
     steps:
-      - node -v
-      - pip install -r requirements.txt -t .
       - npm install -g zcatalyst-cli
-      - catalyst deploy --token <YOUR_TOKEN>
+      - catalyst deploy --token <m_1004.0228e97d50aef6b0164f60660031f30d.27da9d353e0d0cae99c38da531eab06d>
 stages:
   - name: deploy
     jobs:
