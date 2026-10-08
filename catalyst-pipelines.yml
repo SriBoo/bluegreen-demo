@@ -1,17 +1,11 @@
 version: 1.0
 jobs:
-  hello:
+  deploy:
     steps:
-      - echo "Hello"
-  world:
-    steps:
-      - echo "World"
-  hello-world:
-    steps:
-      - echo "Hello World!"
+      - node -v
+      - npm install -g zcatalyst-cli
+      - catalyst deploy --token $CATALYST_TOKEN
 stages:
-  - name: build
+  - name: deploy
     jobs:
-      - - hello
-        - world
-      - hello-world
+      - deploy
