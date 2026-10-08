@@ -4,7 +4,7 @@ jobs:
     steps:
       - node -v
       - npm install -g zcatalyst-cli
-      - catalyst deploy --token $CATALYST_TOKEN
+      - catalyst deploy
 stages:
   - name: deploy
     jobs:
