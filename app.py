@@ -20,7 +20,7 @@ class H(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body.encode())
 
-    def do_GET(self):
+    def do_GET(self)
 
         if self.path == "/health":
             self._send(200, "ok\n")
