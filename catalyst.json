@@ -1,10 +1,6 @@
 {
   "appsail": [
     {
-      "source": "docker://demo-app:v2",
-      "name": "bluegreen-test"
-    },
-    {
       "source": ".",
       "name": "test-app"
     }
