@@ -1,0 +1,8 @@
+{
+  "command": "python3 -m gunicorn -b 0.0.0.0:9000 app:app",
+  "build_path": "./",
+  "stack": "python_3_12",
+  "env_variables": {"APP_VERSION": "v6"},
+  "memory": 256,
+  "scripts": {"preserve": "pip install -r requirements.txt -t . --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org"}
+}

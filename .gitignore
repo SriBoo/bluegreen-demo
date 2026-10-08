@@ -1,1 +1,11 @@
 nginx/default.conf.bak
+bin/
+blinker*/
+click*/
+flask*/
+gunicorn*/
+itsdangerous*/
+jinja2*/
+markupsafe*/
+werkzeug*/
+__pycache__/

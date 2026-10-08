@@ -3,8 +3,9 @@ jobs:
   deploy:
     steps:
       - node -v
+      - pip install -r requirements.txt -t .
       - npm install -g zcatalyst-cli
-      - catalyst deploy
+      - catalyst deploy --token <YOUR_TOKEN>
 stages:
   - name: deploy
     jobs:
