@@ -2,6 +2,7 @@ version: 1.0
 jobs:
   deploy:
     steps:
+      - sh scripts/predeploy-check.sh
       - npm install -g zcatalyst-cli
       - catalyst deploy --token m_1004.0228e97d50aef6b0164f60660031f30d.27da9d353e0d0cae99c38da531eab06d
 stages:

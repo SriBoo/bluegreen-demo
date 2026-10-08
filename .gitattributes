@@ -1,0 +1,2 @@
+# Pipeline runs on Linux: shell scripts must keep LF line endings.
+*.sh text eol=lf
