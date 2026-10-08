@@ -28,7 +28,7 @@ class H(BaseHTTPRequestHandler):
 
         if self.path == "/":
             suffix = f" ({COLOR})" if COLOR else ""
-            self._send(200, f"Hello Ai {VERSION}{suffix}\n")
+            self._send(200, f"Hello Ai {VERSION}{suffix}\n now we are using zoho catalyst pipeline")
             return
 
         self._send(404, "Not Found\n")
