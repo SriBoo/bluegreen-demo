@@ -15,7 +15,7 @@ docker run -d --name app-$new --network bgnet -e APP_VERSION=$Version demo-app:$
 
 $healthy = $false
 for ($i = 0; $i -lt 15; $i++) {
-  docker run --rm --network bgnet curlimages/curl -sf http://app-${new}:5000/health 2>$null | Out-Null
+  docker run --rm --network bgnet curlimages/curl -sf http://app-${new}:9000/health 2>$null | Out-Null
   if ($LASTEXITCODE -eq 0) { $healthy = $true; break }
   Start-Sleep -Seconds 2
 }
