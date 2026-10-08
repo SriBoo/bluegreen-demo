@@ -30,7 +30,7 @@ class H(BaseHTTPRequestHandler):
             self.send_response(200)
             self.end_headers()
             self.wfile.write(
-                f"Hello Ai {version}\n sample test is happening here".encode()
+                f"Hello Ai {version}\n sample test is happening here.encode()
             )
             return
 
